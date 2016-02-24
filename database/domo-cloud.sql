@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 03 Février 2016 à 11:34
+-- Généré le :  Mer 24 Février 2016 à 11:46
 -- Version du serveur :  5.6.28-0ubuntu0.15.10.1
 -- Version de PHP :  5.6.11-1ubuntu3.1
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `domo-cloud`
 --
-CREATE DATABASE IF NOT EXISTS `domo-cloud` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `domo-cloud`;
 
 -- --------------------------------------------------------
 
@@ -28,12 +26,20 @@ USE `domo-cloud`;
 -- Structure de la table `clients`
 --
 
-DROP TABLE IF EXISTS `clients`;
 CREATE TABLE IF NOT EXISTS `clients` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `expire` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `expire` datetime NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `clients`
+--
+
+INSERT INTO `clients` (`id`, `name`, `expire`, `email`, `password`) VALUES
+(1, 'Alexis', '2016-03-31 00:00:00', 'alexis@domocloud.com', 'password');
 
 -- --------------------------------------------------------
 
@@ -41,7 +47,6 @@ CREATE TABLE IF NOT EXISTS `clients` (
 -- Structure de la table `default_orders`
 --
 
-DROP TABLE IF EXISTS `default_orders`;
 CREATE TABLE IF NOT EXISTS `default_orders` (
   `id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
@@ -55,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `default_orders` (
 -- Structure de la table `derogative_orders`
 --
 
-DROP TABLE IF EXISTS `derogative_orders`;
 CREATE TABLE IF NOT EXISTS `derogative_orders` (
   `id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
@@ -71,7 +75,6 @@ CREATE TABLE IF NOT EXISTS `derogative_orders` (
 -- Structure de la table `weekly_orders`
 --
 
-DROP TABLE IF EXISTS `weekly_orders`;
 CREATE TABLE IF NOT EXISTS `weekly_orders` (
   `id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
@@ -118,7 +121,7 @@ ALTER TABLE `weekly_orders`
 -- AUTO_INCREMENT pour la table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `default_orders`
 --
