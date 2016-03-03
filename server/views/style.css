@@ -1,0 +1,12 @@
+body {
+    background: #EEEEEE;
+}
+
+#wrapper {
+    background: green;
+}
+
+.error {
+    color: red;
+    background-color: #FFABAB;
+}

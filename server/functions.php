@@ -11,7 +11,7 @@ if(IsSet($_COOKIE['client_id']) && IsSet($_COOKIE['password_hash'])) {
     if($stmt->rowCount() == 1) {
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
         if(sha1($client['password']) == $_COOKIE['password_hash']) {
-            $user = $_COOKIE['client_id'];
+            $user = $client;
         }
     }
 }

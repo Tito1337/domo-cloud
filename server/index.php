@@ -40,6 +40,16 @@ if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) {
 } else if(!$user) {
     include('views/login.php');
 } else {
-    include('views/dashboard.php');
+    if(IsSet($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = false;
+    }
+
+    if($page == "room") {
+        include('views/room.php');
+    } else {
+        include('views/dashboard.php');
+    }
 }
 ?>

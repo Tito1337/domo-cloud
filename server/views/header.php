@@ -4,5 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<title>Domo-Cloud</title>
+    <link href="/views/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<div id="wrapper">
