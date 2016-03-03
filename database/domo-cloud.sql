@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 24 Février 2016 à 11:46
+-- Généré le :  Jeu 03 Mars 2016 à 09:43
 -- Version du serveur :  5.6.28-0ubuntu0.15.10.1
 -- Version de PHP :  5.6.11-1ubuntu3.1
 
@@ -72,6 +72,27 @@ CREATE TABLE IF NOT EXISTS `derogative_orders` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `rooms`
+--
+
+CREATE TABLE IF NOT EXISTS `rooms` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `rooms`
+--
+
+INSERT INTO `rooms` (`id`, `client_id`, `name`) VALUES
+(1, 1, 'Salon'),
+(2, 1, 'Chambre'),
+(3, 1, 'Salle de bain');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `weekly_orders`
 --
 
@@ -108,6 +129,12 @@ ALTER TABLE `derogative_orders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `weekly_orders`
 --
 ALTER TABLE `weekly_orders`
@@ -132,6 +159,11 @@ ALTER TABLE `default_orders`
 --
 ALTER TABLE `derogative_orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `weekly_orders`
 --
