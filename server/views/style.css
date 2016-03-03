@@ -1,12 +1,57 @@
 body {
-    background: #EEEEEE;
+    background: #CFD8F6;
+    font-family: "Arial";
+    font-size: 14px;
+	text-size-adjust: initial;
 }
 
 #wrapper {
-    background: green;
+    /*background: #a6a9b6;*/
 }
 
 .error {
     color: red;
     background-color: #FFABAB;
+}
+
+div {
+    width: 80%;
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    /*margin: calc(50px + 10vm);*/
+    /*font-size: calc(12px + 2vw);*/
+    font-size: calc( 12px + (20 - 12) * ( (100vw - 400px) / ( 1000 - 500) ));
+    /*font-size: 24px;*/
+
+}
+
+h1 {
+    color: blue;
+    text-align: center;
+}
+
+h2 {
+    color: #845321;
+    text-align: center;
+    font-size: 24px;
+}
+
+p {
+	text-size-adjust: 50%; 
+    /*width: 100%;*/
+    /*font-size: 14px;*/
+    /*font-size: 12px; */
+    /*font-size: 2vw;*/
+    /*text-size-adjust: 80%;*/
+/*
+    font-size: 36px;  Some tweener fallback that doesn't look awful  
+  	font-size: 5.4vw;  */
+}
+
+a {
+
+	/*color: green;*/
 }
