@@ -5,6 +5,12 @@
 
 	<title>Domo-Cloud</title>
     <link href="/views/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/fullcalendar.css" rel="stylesheet" type="text/css" />
+
+    <script type='text/javascript' src='/js/jquery.min.js'></script>
+    <script type='text/javascript' src='/js/moment.min.js'></script>
+    <script type='text/javascript' src='/js/fullcalendar.js'></script>
+    <script type='text/javascript' src='/js/fullcalendar-lang.js'></script>
 </head>
 <body>
 <div id="wrapper">

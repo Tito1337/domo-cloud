@@ -15,4 +15,11 @@ if(IsSet($_COOKIE['client_id']) && IsSet($_COOKIE['password_hash'])) {
         }
     }
 }
+
+function get_current_order($room_id, $client_id=false) {
+    global $user;
+    if(!$client_id) $client_id = $user['id'];
+    
+    return 42;
+}
 ?>
