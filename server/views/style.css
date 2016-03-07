@@ -3,10 +3,12 @@ body {
     font-family: "Arial";
     font-size: 14px;
 	text-size-adjust: initial;
+    margin: 50px 50px 50px 50px;
 }
 
 #wrapper {
     /*background: #a6a9b6;*/
+    padding: 0 0 0 20px;
 }
 
 .error {
@@ -14,44 +16,35 @@ body {
     background-color: #FFABAB;
 }
 
-div {
-    width: 80%;
-    border: 1px solid black;
-    margin-top: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
-    margin-left: 50px;
-    /*margin: calc(50px + 10vm);*/
-    /*font-size: calc(12px + 2vw);*/
-    font-size: calc( 12px + (20 - 12) * ( (100vw - 400px) / ( 1000 - 500) ));
-    /*font-size: 24px;*/
-
+/*fieldset {
+    border: inline-block;
+    border-radius: 10px;
 }
+*/
+/*fieldset.elist {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    border: none;
+}*/
 
-h1 {
-    color: blue;
-    text-align: center;
+/*textarea {
+    width: 500px;
+    height: 200px;
+    padding: 20px;
+}*/
+
+div {
+    border: 1px solid black;
+    font-size: calc( 12px + (20 - 12) * ( (100vw - 400px) / ( 1000 - 500) ));
+
 }
 
 h2 {
     color: #845321;
     text-align: center;
     font-size: 24px;
-}
-
-p {
-	text-size-adjust: 50%; 
-    /*width: 100%;*/
-    /*font-size: 14px;*/
-    /*font-size: 12px; */
-    /*font-size: 2vw;*/
-    /*text-size-adjust: 80%;*/
-/*
-    font-size: 36px;  Some tweener fallback that doesn't look awful  
-  	font-size: 5.4vw;  */
-}
-
-a {
-
-	/*color: green;*/
 }
