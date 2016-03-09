@@ -13,4 +13,4 @@
     <script type='text/javascript' src='/js/fullcalendar-lang.js'></script>
 </head>
 <body>
-<div id="wrapper">
+<div id="wrapper", class="dashboard">
