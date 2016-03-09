@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<title>Domo-Cloud</title>
-    <link href="/views/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/fullcalendar.css" rel="stylesheet" type="text/css" />
 
     <script type='text/javascript' src='/js/jquery.min.js'></script>
