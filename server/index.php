@@ -1,7 +1,9 @@
 <?php
+// include('views/dashboard.php');
 include_once('functions.php');
 
-if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) {
+if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) 
+{
     $user = false;
     $error = "";
     if(IsSet($_POST['email']) && !empty($_POST['email'])) {
@@ -36,12 +38,14 @@ if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) {
     }
 
     include('views/login.php');
-} else if(!$user) {
+
+} 
+else if(!$user) 
+{
     include('views/login.php');
-
-} else {
-     /* We are logged in */
-
+} 
+else 
+{
     if(IsSet($_GET['page'])) {
         $page = $_GET['page'];
     } else {
