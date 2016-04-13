@@ -36,10 +36,12 @@ if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) {
     }
 
     include('views/login.php');
-
 } else if(!$user) {
     include('views/login.php');
+
 } else {
+     /* We are logged in */
+
     if(IsSet($_GET['page'])) {
         $page = $_GET['page'];
     } else {
