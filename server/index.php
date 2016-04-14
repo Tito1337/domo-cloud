@@ -1,7 +1,10 @@
 <?php
 // include('views/dashboard.php');
 include_once('functions.php');
+?>
 
+
+<?php
 if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) 
 {
     $user = false;
@@ -59,3 +62,6 @@ else
     }
 }
 ?>
+
+<!-- <div class="error-login"></div> -->
+

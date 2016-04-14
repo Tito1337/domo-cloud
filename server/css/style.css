@@ -11,7 +11,7 @@ body {
     padding: 0 0 10px 20px;
 }
 
-.info, .success, .warning, .error {
+.info, .success, .warning, .error-login {
 	border: 1px solid;
 	margin: 10px 30px 10px 10px;
 	padding:5px 0px 5px 40px;
@@ -38,7 +38,7 @@ body {
 	background-image: url('/images/warning.png');
 }
 
-.error {
+.error-login {
     color: #D8000C;
     background-color: #FFBABA;
     background-image: url('/images/error.png');

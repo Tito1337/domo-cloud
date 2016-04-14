@@ -2,7 +2,7 @@
 include('header.php');
 
 if(!empty($error)) {
-    echo '<ul class="error">'.$error.'</ul>';
+    echo '<ul class="error-login">'.$error.'</ul>';
 }
 ?>
 
