@@ -26,16 +26,16 @@ GPIO.setup(LumExt,GPIO.OUT)#la lumière extérieure est déclaré comme output
 
 GPIO.setup(4,GPIO.IN)#déclaration des fenêtres et portes comme input
 GPIO.setup(17,GPIO.IN)
-GPIO.setup(14,GPIO.IN)
-GPIO.setup(15,GPIO.IN)
+GPIO.setup(27,GPIO.IN)
+GPIO.setup(22,GPIO.IN)
 GPIO.setup(23,GPIO.IN)
 GPIO.setup(24,GPIO.IN)
 GPIO.setup(25,GPIO.IN)
 
 FenAvD = GPIO.gpio_function(4) #on assigne un nom  à la valeur du GPIO 
 FenAvG = GPIO.gpio_function(17)
-FenArD = GPIO.gpio_function(14)
-FenArG = GPIO.gpio_function(15)
+FenArD = GPIO.gpio_function(27)
+FenArG = GPIO.gpio_function(22)
 PorteEntre = GPIO.gpio_function(23)
 PorteIntG = GPIO.gpio_function(24)
 PorteIntD = GPIO.gpio_function(25)
@@ -48,11 +48,10 @@ DefautConsigne = 25 #consigne par defaut
 compteur = 0
 i2c_helper = ABEHelpers()
 bus = i2c_helper.get_smbus()
-adc = ADCPi(bus, 0x6b, 0x6d, 12)
+adc = ADCPi(bus, 0x6c, 0x6d, 12)
 adc.set_conversion_mode(1)
 adc.set_pga(1)
 while (True):
-	
 	os.system('clear')
 	# read from adc channels and print to screen
 	print ("Channel 1: %02f" % adc.read_voltage(1))
