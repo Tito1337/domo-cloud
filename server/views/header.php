@@ -6,36 +6,30 @@
 <html lang="en">
   <head>
     <head>
-    	<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
 
-
+    	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
     	<title>Domo-Cloud</title>
-        <!-- <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/css/fullcalendar.css" rel="stylesheet" type="text/css" />
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="css/dashboard.css" rel="stylesheet">
+        <link href="css/signin.css" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <script type='text/javascript' src='/js/jquery.min.js'></script>
         <script type='text/javascript' src='/js/moment.min.js'></script>
         <script type='text/javascript' src='/js/fullcalendar.js'></script>
-        <script type='text/javascript' src='/js/fullcalendar-lang.js'></script> -->
-
-
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="css/dashboard.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="css/signin.css" rel="stylesheet">
+        <script type='text/javascript' src='/js/fullcalendar-lang.js'></script>
+        
 
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -48,4 +42,4 @@
         <![endif]-->
     </head>
 <body>
-<!-- <div id="wrapper" class="dashboard">  -->
+<div id="wrapper" class="dashboard"> 
