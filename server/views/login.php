@@ -6,18 +6,6 @@ if(!empty($error)) {
 }
 ?>
 
-<!-- <form action="/" method="POST">
-    <input type="hidden" name="action" value="login" />
-
-    <label for="email">Identifiant :</label> 
-    <input type="text" id="email" name="email" value="<?php echo IsSet($email)?$email:'';?>" /><br />
-    
-    <label for="password">Mot de passe :</label> 
-    <input type="password" id="password" name="password" /><br />
-    
-    <input type="submit" value="Connexion" />
-</form> -->
-
 <div class="container">
 	<form class="form-signin" action="/" method="POST">
 		<h2 class="form-signin-heading">Please sign in</h2>
