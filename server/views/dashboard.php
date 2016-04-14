@@ -1,4 +1,6 @@
 <?php include('header.php'); ?>
+<!-- TODO: test if ok in the dashboard -->
+<div id="wrapper" class="dashboard"> 
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
