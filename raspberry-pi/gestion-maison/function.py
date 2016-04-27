@@ -3,9 +3,11 @@
 import time
 import os
 import RPi.GPIO as GPIO
+import http.client
+import json
+from pprint import pprint
 
 #-------------------Déclaration des GPIOs----------------------
-
 GPIO.setmode(GPIO.BCM) # on appelle les GPIOs par leur nom et pas par leurs numéros
 
 ChauffageP1 = 7
@@ -40,12 +42,30 @@ PorteIntG = GPIO.input(24)
 PorteIntD = GPIO.input(25)
 
 #-------------------Déclaration des fonction----------------------
-def VerifConsigne (piece)
-	if piece == 1:
-		
-	elif piece == 2:
-
-	elif piece == 3:
+def getContent(link): #link="upload.webtito.be"
+	conn = http.client.HTTPConnection(link)#create a connection to the adress
+	#conn.request("GET", "/rpi.json")#This will send a request to the server using the HTTP request method method and the selector url
+	#r1 = conn.getresponse()
+	#print(r1.status, r1.reason,type(r1))
+	data1 = r1.read()  # This will return entire content.
+	# The following example demonstrates reading data in chunks.
+	conn.request("GET", "/rpi.json")
+	r = conn.getresponse()
+	
+	while not r.closed:
+#		print(r.read(200)) # 200 bytes
+		data=r.read().decode()
+		if data == b'':
+			break
+		#print('Content', data)
+		jsondata = json.loads(data)
+		#pprint(jsondata)
+		temp1=jsondata['1']
+		temp2=jsondata['2']
+		temp3=jsondata['3']
+		#print("pièce1: %d \npièce2: %d \npièce3: %d \n type : %s"%(temp1, temp2, temp3,type(jsondata)))
+		return jsondata
+	conn.close()
 def NiveauHaut(gpio):
 	GPIO.output(gpio,GPIO.HIGH)
 
@@ -111,7 +131,7 @@ while (True):
 	AllumerChauffage(2)
 	AllumerChauffage(3)
 	AllumerChauffage(1)	
-	print("etat de la lampe :%d",%etatLampe2)	
+	print("etat de la lampe :%d" %etatLampe2)	
 	print("porte entree : %d" %PorteEntre)
 	print("porte int gauche : %d" %PorteIntG)
 	print("porte int droit : %d" %PorteIntD)
