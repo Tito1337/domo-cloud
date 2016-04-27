@@ -39,19 +39,20 @@ if(IsSet($_POST['action']) && ($_POST['action'] == 'login'))
 
     include('views/login.php');
 
-} 
-else if(!$user) 
-{
+} else if(!$user) {
     include('views/login.php');
-} 
-else 
-{
+} else {
     if(IsSet($_GET['page'])) {
         $page = $_GET['page'];
     } else {
         $page = false;
     }
 
+    if($page == "logout") {
+        setcookie('client_id', '');
+        setcookie('password_hash', '');
+        header('Location: /');
+    }
     if($page == "room") {
         include('views/room.php');
     } else {

@@ -31,7 +31,7 @@
     </head>
 <body>
 
-<div id="wrapper" class="dashboard">
+<div id="wrapper" class="dashboard container">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -44,17 +44,20 @@
             </button>
             <a class="navbar-brand" href="#">Domo-Cloud</a>
         </div>
+        <?php if($user) { ?>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Dashboard</a></li>
                 <li><a href="/?page=logout">Logout</a></li>
             </ul>
         </div>
+        <?php } ?>
     </div>
 </nav>
 
 <div class="container-fluid">
     <div class="row">
+        <?php if($user) { ?>
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                     <?php
@@ -73,4 +76,5 @@
                     ?>
             </ul>
         </div>
+        <?php } ?>
         <div class="col-sm-9 col-md-10 main">

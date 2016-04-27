@@ -27,8 +27,5 @@ if(!empty($error)) {
 		<!-- <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button> -->
 		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" >Sign in</button>
 	</form>
-</div> 
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../js/ie10-viewport-bug-workaround.js"></script>
-<?php include('footer.php'); ?> 
+</div>
+<?php include('footer.php'); ?>
