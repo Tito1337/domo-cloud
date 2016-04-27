@@ -47,7 +47,7 @@ def getContent(link): #link="upload.webtito.be"
 	#conn.request("GET", "/rpi.json")#This will send a request to the server using the HTTP request method method and the selector url
 	#r1 = conn.getresponse()
 	#print(r1.status, r1.reason,type(r1))
-	data1 = r1.read()  # This will return entire content.
+	#data1 = r1.read()  # This will return entire content.
 	# The following example demonstrates reading data in chunks.
 	conn.request("GET", "/rpi.json")
 	r = conn.getresponse()
@@ -127,6 +127,8 @@ while (True):
 	
 	os.system('clear')	
 	
+	jsondata=getContent("upload.webtito.be")
+		
 	AllumerChauffage(4)
 	AllumerChauffage(2)
 	AllumerChauffage(3)
