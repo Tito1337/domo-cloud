@@ -6,6 +6,23 @@ if(IsSet($_GET['room_id'])) {
     $stmt->execute();
     if($stmt->rowCount() == 1) {
         $room = $stmt->fetch(PDO::FETCH_ASSOC);
+        /* Save default */
+        if(IsSet($_POST['default_order'])) {
+            /* Delete old orders */
+            $stmt = $db->prepare("DELETE FROM default_orders WHERE client_id=:client_id AND room_id=:room_id");
+            $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':room_id', $room['id'], PDO::PARAM_INT);
+            $stmt->execute();
+
+            /* Populate new orders */
+            $stmt = $db->prepare("INSERT INTO default_orders (client_id, room_id, temperature) VALUES (:client_id, :room_id, :temperature)");
+            $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':room_id', $room['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':temperature', $_POST['default_order'], PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        /* Save weekly */
         if(IsSet($_POST['clientEvents'])) {
             $newOrders = json_decode($_POST['clientEvents'], true);
             /* Delete old orders */
@@ -29,32 +46,48 @@ if(IsSet($_GET['room_id'])) {
             }
 
         }
-        echo '<h2>'.$room['name'].'</h2>';
-        echo '<p>Consigne actuelle : '.get_current_order($room['id'])."</p>\n";
 
-        echo '<h3>Consigne par défaut</h3>';
-        echo '<p>Consigne par défaut actuelle : '.get_default_order($room['id'])."</p>\n";
 
-        echo '<h3>Consignes de dérogation</h3>';
-        $stmt = $db->prepare("SELECT * FROM derogative_orders WHERE client_id=:client_id AND room_id=:room_id AND stop>NOW()");
-        $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
-        $stmt->bindValue(':room_id', $_GET['room_id'], PDO::PARAM_INT);
-        $stmt->execute();
-        if($stmt->rowCount() < 1) {
-            echo 'Pas de dérogations programmées';
-        } else {
-            $derogations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo '<ul>';
-            foreach($derogations as $derogation) {
-                echo '<li>Du '.$derogation['start'].' au '.$derogation['stop'].' : '.$derogation['temperature'].'°C</li>'."\n";
-            }
-            echo '</ul>';
-        }
-        echo '<p><a href="#">Ajouter une dérogation</a></p>';
-        echo '<h3>Consignes hebdomadaires</h3>'; ?>
-        <form action="/?page=room&room_id=<?php echo $_GET['room_id'] ?>" id="weeklyForm" method="POST">
+        echo '<h2>'.$room['name'].'</h2>'; ?>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Consigne actuelle</h3>
+                </div>
+                <div class="panel-body">
+                    <?php echo get_current_order($room['id']); ?>°C
+                </div>
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Consigne par défaut</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/?page=room&room_id=<?php echo $_GET['room_id']; ?>" method="POST" class="form-inline">
+                    <div class="input-group">
+                        <input type="number" name="default_order" id="default_order" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
+                        <span class="input-group-addon">°C</span>
+                    </div>
+                    <button type="submit" class="btn btn-default">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Consignes hebdomadaires</h3>
+            </div>
+            <div class="panel-body">
+                    <form action="/?page=room&room_id=<?php echo $_GET['room_id'] ?>" id="weeklyForm" method="POST">
         <input type="hidden" name="action" value="submitWeekly" />
-        <div id='calendar' style="width: 75%;"></div>
+        <div id='calendar' style="width: 100%;"></div>
 
         <script>
             $(document).ready(function() {
@@ -119,7 +152,7 @@ if(IsSet($_GET['room_id'])) {
         </script>
 
         <input type="hidden" id="clientEvents" name="clientEvents" value="" />
-        <input type="submit" id="submitWeekly" value="Enregistrer" />
+        <button type="submit" id="submitWeekly" class="btn btn-default" style="margin-top: 5px;">Enregistrer</button>
         <script>
         $('#weeklyForm').submit(function(eventObj) {
             var eventsFromCalendar = $('#calendar').fullCalendar('clientEvents');
@@ -137,7 +170,57 @@ if(IsSet($_GET['room_id'])) {
         });
         </script>
         </form>
+            </div>
+        </div>
 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Dérogations</h3>
+            </div>
+            <div class="panel-body">
+                <form action="/?page=room&room_id=<?php echo $_GET['room_id']; ?>" method="POST" class="form-inline">
+                <table>
+                    <tr>
+                        <th>De</th>
+                        <th>À</th>
+                        <th>Température</th>
+                    </tr>
+                    <td>
+                        <div class="input-group">
+                            <input type="datetime" name="default_order" id="default_order" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <input type="datetime" name="default_order" id="default_order" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <input type="number" name="default_order" id="default_order" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
+                            <span class="input-group-addon">°C</span>
+                        </div>
+                    </td>
+                </table>
+                <?php
+                $stmt = $db->prepare("SELECT * FROM derogative_orders WHERE client_id=:client_id AND room_id=:room_id AND stop>NOW()");
+                $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
+                $stmt->bindValue(':room_id', $_GET['room_id'], PDO::PARAM_INT);
+                $stmt->execute();
+                if($stmt->rowCount() < 1) {
+                    echo 'Pas de dérogations programmées';
+                } else {
+                    $derogations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    echo '<ul>';
+                    foreach($derogations as $derogation) {
+                        echo '<li>Du '.$derogation['start'].' au '.$derogation['stop'].' : '.$derogation['temperature'].'°C</li>'."\n";
+                    }
+                    echo '</ul>';
+                }
+                ?>
+                <p><a href="#">Ajouter une dérogation</a></p>
+            </div>
+        </div>
 
         <?php
     } else {
