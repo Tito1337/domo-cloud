@@ -22,16 +22,6 @@ body {
 	background-size: 20px;
 }
 
-.error-login {
-    border: 1px solid;
-    max-width: 270px; /* maximum size of the error */
-    margin: 0 auto; /* auto margin */
-    padding:5px 0px 5px 40px;
-    background-repeat: no-repeat;
-    background-position: 15px center;
-    background-size: 20px;
-}
-
 .info {
 	color: #00529B;
 	background-color: #BDE5F8;

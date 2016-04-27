@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Domo-Cloud</a>
+            <a class="navbar-brand" href="/">Domo-Cloud</a>
         </div>
         <?php if($user) { ?>
         <div id="navbar" class="navbar-collapse collapse">
@@ -76,5 +76,8 @@
                     ?>
             </ul>
         </div>
-        <?php } ?>
         <div class="col-sm-9 col-md-10 main">
+        <?php } else { ?>
+        <div class="col-sm-12 col-md-12 main">
+        <?php } ?>
+        

@@ -1,13 +1,13 @@
 <?php
 include('header.php');
 
+echo '<form class="form-signin" action="/" method="POST">';
 if(!empty($error)) {
-    echo '<ul class="error-login">'.$error.'</ul>';
+    echo '<div class="alert alert-danger" role="alert">';
+    echo '<ul>'.$error.'</ul>';
+    echo '</div>';
 }
 ?>
-
-<div class="container">
-	<form class="form-signin" action="/" method="POST">
 		<h2 class="form-signin-heading">Please sign in</h2>
 
 		<input type="hidden" name="action" value="login" />
@@ -20,12 +20,7 @@ if(!empty($error)) {
 		<!-- <input type="password" id="inputPassword" class="form-control" placeholder="Password" required> -->
 		<input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
 		
-		<div class="checkbox">
-			<label><input type="checkbox" value="remember-me"> Remember me</label>
-		</div>
-
 		<!-- <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button> -->
 		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" >Sign in</button>
 	</form>
-</div>
 <?php include('footer.php'); ?>
