@@ -1,13 +1,10 @@
 <?php
 // include('views/dashboard.php');
 include_once('functions.php');
-?>
 
-
-<?php
 if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) 
 {
-    $user = false;
+    // $user = false;
     $error = "";
     if(IsSet($_POST['email']) && !empty($_POST['email'])) {
         $email = $_POST['email'];
