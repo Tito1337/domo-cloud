@@ -25,10 +25,10 @@
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <script type='text/javascript' src='/js/jquery.min.js'></script>
-        <script type='text/javascript' src='/js/moment.min.js'></script>
-        <script type='text/javascript' src='/js/fullcalendar.js'></script>
-        <script type='text/javascript' src='/js/fullcalendar-lang.js'></script>
+        <script type='text/javascript' src='../js/jquery.min.js'></script>
+        <script type='text/javascript' src='../js/moment.min.js'></script>
+        <script type='text/javascript' src='../js/fullcalendar.js'></script>
+        <script type='text/javascript' src='../js/fullcalendar-lang.js'></script>
         
 
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
