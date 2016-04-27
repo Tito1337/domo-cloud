@@ -74,21 +74,21 @@ def NiveauBas(gpio):
 
 def AllumerChauffage(piece):
 	if piece == 1:
-		if VerifFen(piece)== True:
+		if VerifFen(piece)== False:
 			NiveauHaut(ChauffageP1)
 			etatLampe1=True
 		else:
 			NiveauBas(ChauffageP1)
 			etatLampe1=False
 	elif piece == 2:
-		if VerifFen(piece)== True:
+		if VerifFen(piece)== False:
 			NiveauHaut(ChauffageP2)
 			etatLampe2=True
 		else:
 			NiveauBas(ChauffageP2)
 			etatLampe2=False
 	elif piece == 3:
-		if VerifFen(piece)== True:
+		if VerifFen(piece)== False:
 			NiveauHaut(ChauffageP3)
 			etatLampe3=True
 		else:
