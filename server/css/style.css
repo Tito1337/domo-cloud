@@ -8,7 +8,9 @@ body {
 
 #wrapper {
     /*background: #a6a9b6;*/
-    padding: 0 0 10px 20px;
+
+    /*NO padding in the dashboard!*/
+    /*padding: 0 0 10px 20px;*/
 }
 
 .info, .success, .warning {
