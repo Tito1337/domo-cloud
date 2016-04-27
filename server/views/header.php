@@ -47,7 +47,7 @@
         <?php if($user) { ?>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">Dashboard</a></li>
+                <li><a href="/"><?php echo $user['name']; ?></a></li>
                 <li><a href="/?page=logout">Logout</a></li>
             </ul>
         </div>
