@@ -48,8 +48,8 @@ def calcul(voltage):
 	return ((voltage/0.01)+2)
 	
 def connectionOk()	:
-	hostname = "upload.webtito.be"
-	response = os.system("ping -c 1" + hostname)
+	hostname = "google.com"
+	response = os.system("ping -c 1 " + hostname)
 	if response ==0:
 		return True
 	else:
@@ -58,11 +58,11 @@ def getLocalTemp(piece):
 	file=open('text.txt','r')
 	list=file.readlines()
 	if piece == 1:
-		return list[0]
+		return int(list[0])
 	elif piece == 2:
-		return list[1]
+		return int(list[1])
 	elif piece == 3:
-		return list[2]
+		return int(list[2])
 def gestionMaison():
 	if connectionOk():
 		gestionPiece(1,"upload.webtito.be")
