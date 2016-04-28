@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+from ABE_ADCPi import ADCPi
+from ABE_helpers import ABEHelpers
 import time
 import os
 import RPi.GPIO as GPIO
@@ -42,6 +44,20 @@ PorteIntG = GPIO.input(24)
 PorteIntD = GPIO.input(25)
 
 #-------------------Déclaration des fonction----------------------
+def calcul(voltage):
+	return ((voltage/0.01)+2)
+	
+def isTempOk(piece)
+	jsondata=getContent("upload.webtito.be")
+	if piece == 1:
+		if (jsondata['1']<=calcul(adc.read_voltage(1))):
+			
+	elif piece == 2:
+		
+	elif piece == 3:
+		
+	else:
+
 def getContent(link): #link="upload.webtito.be"
 	conn = http.client.HTTPConnection(link)#create a connection to the adress
 	#conn.request("GET", "/rpi.json")#This will send a request to the server using the HTTP request method method and the selector url
@@ -66,6 +82,7 @@ def getContent(link): #link="upload.webtito.be"
 		#print("pièce1: %d \npièce2: %d \npièce3: %d \n type : %s"%(temp1, temp2, temp3,type(jsondata)))
 		return jsondata
 	conn.close()
+	
 def NiveauHaut(gpio):
 	GPIO.output(gpio,GPIO.HIGH)
 
@@ -115,6 +132,14 @@ def VerifFen(piece):
                         return False
 	else:
                 print("error: entrez le bon numéro de pièce")
+#------------------programme----------------------------------
+compteur = 0
+i2c_helper = ABEHelpers()
+bus = i2c_helper.get_smbus()
+adc = ADCPi(bus, 0x6c, 0x6d, 12)
+adc.set_conversion_mode(1)
+adc.set_pga(1)
+				
 
 while (True):
 	FenAvD = GPIO.input(4) #on assigne un nom  à la valeur du GPIO
@@ -127,6 +152,7 @@ while (True):
 	
 	os.system('clear')	
 	
+	print ("Channel 1: %02f" % adc.read_voltage(1))
 	jsondata=getContent("upload.webtito.be")
 		
 	AllumerChauffage(4)
