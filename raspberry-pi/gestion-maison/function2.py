@@ -47,30 +47,59 @@ PorteIntD = GPIO.input(25)
 def calcul(voltage):
 	return ((voltage/0.01)+2)
 	
-def isTempOk(piece)
-	jsondata=getContent("upload.webtito.be")
+def connectionOk()	:
+	hostname = "upload.webtito.be"
+	response = os.system("ping -c 1" + hostname)
+	if response ==0:
+		return True
+	else:
+		return False
+def getLocalTemp(piece):
+	file=open('text.txt','r')
+	list=file.readlines()
+	if piece == 1:
+		return list[0]
+	elif piece == 2:
+		return list[1]
+	elif piece == 3:
+		return list[2]
+def gestionMaison():
+	if connectionOk():
+		gestionPiece(1,"upload.webtito.be")
+		gestionPiece(2,"upload.webtito.be")
+		gestionPiece(3,"upload.webtito.be")
+	else:
+		gestionPiece(1,getLocalTemp(1))
+		gestionPiece(2,getLocalTemp(2))
+		gestionPiece(3,getLocalTemp(3))
+	
+def gestionPiece(piece,url):
+	jsondata=getContent(url)
 	if piece == 1:
 		if (jsondata['1']<=calcul(adc.read_voltage(1))):
-			
+			AllumerChauffage(1)
+		else:
+			EteindreChauffage(1)
 	elif piece == 2:
-		
+		if (jsondata['1']<=calcul(adc.read_voltage(1))):
+			AllumerChauffage(1)
+		else:
+			EteindreChauffage(1)		
 	elif piece == 3:
-		
+		if (jsondata['1']<=calcul(adc.read_voltage(1))):
+			AllumerChauffage(1)
+		else:
+			EteindreChauffage(1)		
 	else:
+		print("error: entrez le bon numéro de pièce")
 
 def getContent(link): #link="upload.webtito.be"
 	conn = http.client.HTTPConnection(link)#create a connection to the adress
-	#conn.request("GET", "/rpi.json")#This will send a request to the server using the HTTP request method method and the selector url
-	#r1 = conn.getresponse()
-	#print(r1.status, r1.reason,type(r1))
-	#data1 = r1.read()  # This will return entire content.
-	# The following example demonstrates reading data in chunks.
-	conn.request("GET", "/rpi.json")
+	conn.request("GET", "/rpi.json")#This will send a request to the server using the HTTP request method method and the selector url
 	r = conn.getresponse()
 	
 	while not r.closed:
-#		print(r.read(200)) # 200 bytes
-		data=r.read().decode()
+		data=r.read().decode()# This will return and decode entire content.
 		if data == b'':
 			break
 		#print('Content', data)
@@ -88,6 +117,19 @@ def NiveauHaut(gpio):
 
 def NiveauBas(gpio):
 	GPIO.output(gpio,GPIO.LOW)	
+
+def EteindreChauffage(piece):
+	if piece == 1:
+			NiveauBas(ChauffageP1)
+			etatLampe1=False
+	elif piece == 2:
+			NiveauBas(ChauffageP2)
+			etatLampe2=False
+	elif piece == 3:
+			NiveauBas(ChauffageP3)
+			etatLampe3=False
+	else:
+		print("error: entrez le bon numéro de pièce")	
 
 def AllumerChauffage(piece):
 	if piece == 1:
@@ -132,8 +174,8 @@ def VerifFen(piece):
                         return False
 	else:
                 print("error: entrez le bon numéro de pièce")
+
 #------------------programme----------------------------------
-compteur = 0
 i2c_helper = ABEHelpers()
 bus = i2c_helper.get_smbus()
 adc = ADCPi(bus, 0x6c, 0x6d, 12)
@@ -153,12 +195,9 @@ while (True):
 	os.system('clear')	
 	
 	print ("Channel 1: %02f" % adc.read_voltage(1))
-	jsondata=getContent("upload.webtito.be")
-		
-	AllumerChauffage(4)
-	AllumerChauffage(2)
-	AllumerChauffage(3)
-	AllumerChauffage(1)	
+	
+	gestionPiece(1)
+	#AllumerChauffage(1)	
 	print("etat de la lampe :%d" %etatLampe2)	
 	print("porte entree : %d" %PorteEntre)
 	print("porte int gauche : %d" %PorteIntG)
