@@ -10,7 +10,9 @@ session_start();
 if(isset($_POST['Suivant']))
 {
     $Consigne = $_POST["Consigne"];
-    include_once "vueConfirmation.php";
+    $file = 'text.txt';
+	file_put_contents($file, $Consigne);	
+	include_once "vueConfirmation.php";
 }
 else
 {
