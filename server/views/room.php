@@ -48,7 +48,7 @@ if(IsSet($_GET['room_id'])) {
         }
 
 
-        echo '<h2>'.$room['name'].'</h2>'; ?>
+        echo '<h2 class="page-header">'.$room['name'].'</h2>'; ?>
         <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">

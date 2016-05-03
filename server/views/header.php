@@ -22,6 +22,7 @@
         <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/bootstrap.datetime.css" rel="stylesheet">
+        <link href="/css/font-awesome.min.css" rel="stylesheet">
 
         <script type='text/javascript' src='/js/jquery.min.js'></script>
         <script type='text/javascript' src='/js/moment.min.js'></script>
@@ -51,8 +52,12 @@
         <?php if($user) { ?>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/"><?php echo $user['name']; ?></a></li>
-                <li><a href="/?page=logout">Logout</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $user['name']; ?></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/?page=logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <?php } ?>
@@ -62,26 +67,28 @@
 <div class="container-fluid">
     <div class="row">
         <?php if($user) { ?>
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                    <?php
-                    $stmt = $db->prepare("SELECT * FROM rooms WHERE client_id=:client_id");
-                    $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
-                    $stmt->execute();
-                    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach($rooms as $room) {
-                        if(IsSet($_GET['room_id']) && $_GET['room_id'] == $room['id']) {
-                            $active = 'class="active"';
-                        } else {
-                            $active = '';
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar" style="margin-bottom: 0.5em;">
+                    <li <?php echo ($page=="dashboard")?'class="active"':''; ?>><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                        <?php
+                        $stmt = $db->prepare("SELECT * FROM rooms WHERE client_id=:client_id");
+                        $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
+                        $stmt->execute();
+                        $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($rooms as $room) {
+                            if(IsSet($_GET['room_id']) && $_GET['room_id'] == $room['id']) {
+                                $active = 'class="active"';
+                            } else {
+                                $active = '';
+                            }
+                            echo '<li '.$active.'><a href="/?page=room&room_id='.$room['id'].'"><i class="fa fa-sliders"></i> '.$room['name'].'</a></li>';
                         }
-                        echo '<li '.$active.'><a href="/?page=room&room_id='.$room['id'].'">'.$room['name'].'</a></li>';
-                    }
-                    ?>
-            </ul>
-        </div>
-        <div class="col-sm-9 col-md-10 main">
+                        ?>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-md-10 main">
         <?php } else { ?>
-        <div class="col-sm-12 col-md-12 main">
+            <div class="col-sm-12 col-md-12 main">
         <?php } ?>
-        

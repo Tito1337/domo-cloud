@@ -4,6 +4,7 @@ include_once('functions.php');
 
 if(IsSet($_POST['action']) && ($_POST['action'] == 'login')) 
 {
+    $page = "login";
     // $user = false;
     $error = "";
     if(IsSet($_POST['email']) && !empty($_POST['email'])) {
@@ -36,7 +37,6 @@ if(IsSet($_POST['action']) && ($_POST['action'] == 'login'))
             $error = "<li>Indentifiant inconnu</li>";
         }
     }
-
     include('views/login.php');
 
 } else if(!$user) {
@@ -56,6 +56,7 @@ if(IsSet($_POST['action']) && ($_POST['action'] == 'login'))
     if($page == "room") {
         include('views/room.php');
     } else {
+        $page = "dashboard";
         include('views/dashboard.php');
     }
 }

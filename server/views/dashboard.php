@@ -1,6 +1,6 @@
-<?php include('header.php'); ?>
+<?php $dashboard=true; include('header.php'); ?>
 <!-- TODO: test if ok in the dashboard -->
-            <h1 class="page-header">Bienvenue dans votre Dashboard</h1>
+            <h2 class="page-header">Bienvenue dans votre Dashboard</h1>
             <!-- <p>Connecté en tant que <?php echo $user['name']; ?></p> -->
 
             <div class="panel panel-default">
@@ -26,7 +26,7 @@
                             $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             foreach($rooms as $room) {
                                 // echo '<a href="/?page=room&room_id='.$room['id'].'">'.$room['name'].'</a>';
-                                echo '<tr><td>'.$room['name'].'</td><td>? °C</td><td>'.get_current_order($room['id']).'</td><td><a class="btn btn-default" href="/?page=room&room_id='.$room['id'].'">Programmer</a></tr>';
+                                echo '<tr><td>'.$room['name'].'</td><td><i class="fa fa-cog fa-spin"></i> °C</td><td>'.get_current_order($room['id']).'</td><td><a class="btn btn-default" href="/?page=room&room_id='.$room['id'].'">Programmer</a></tr>';
                             }
                             ?>
                     </tbody>
