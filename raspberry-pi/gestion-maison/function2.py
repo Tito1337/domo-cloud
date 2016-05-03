@@ -13,7 +13,7 @@ from pprint import pprint
 GPIO.setmode(GPIO.BCM) # on appelle les GPIOs par leur nom et pas par leurs numéros
 
 ChauffageP1 = 7
-ChauffageP2 = 8
+ChauffageP2 = 8 # cuisine
 ChauffageP3 = 9
 LumExt = 10
 
@@ -48,7 +48,7 @@ def calcul(voltage):
 	return ((voltage/0.01)+2)
 	
 def connectionOk()	:
-	hostname = "google.com"
+	hostname = "www.google.com"
 	response = os.system("ping -c 1 " + hostname)
 	if response ==0:
 		return True
@@ -74,40 +74,40 @@ def gestionMaison():
 		gestionLocal(3)
 def gestionLocal(piece):
 	if piece == 1:
-		if (getLocalTemp(1)<=calcul(adc.read_voltage(1))):
+		if (getLocalTemp(1)>calcul(adc.read_voltage(1))):
 			AllumerChauffage(1)
 		else:
 			EteindreChauffage(1)
 	elif piece == 2:
-		if (getLocalTemp(2)<=calcul(adc.read_voltage(1))):
-			AllumerChauffage(1)
+		if (getLocalTemp(2)>calcul(adc.read_voltage(1))):
+			AllumerChauffage(2)
 		else:
-			EteindreChauffage(1)
+			EteindreChauffage(2)
 	elif piece == 3:
-		if (getLocalTemp(3)<=calcul(adc.read_voltage(1))):
-			AllumerChauffage(1)
+		if (getLocalTemp(3)>calcul(adc.read_voltage(1))):
+			AllumerChauffage(3)
 		else:
-			EteindreChauffage(1)
+			EteindreChauffage(3)
 	else:
 		print("error: entrez le bon numéro de pièce")
 
 def gestionPiece(piece,url):
 	jsondata=getContent(url)
 	if piece == 1:
-		if (jsondata['1']<=calcul(adc.read_voltage(1))):
+		if (jsondata['1']>calcul(adc.read_voltage(1))):
 			AllumerChauffage(1)
 		else:
 			EteindreChauffage(1)
 	elif piece == 2:
-		if (jsondata['1']<=calcul(adc.read_voltage(1))):
-			AllumerChauffage(1)
+		if (jsondata['2']>calcul(adc.read_voltage(2))):
+			AllumerChauffage(2)
 		else:
-			EteindreChauffage(1)		
+			EteindreChauffage(2)		
 	elif piece == 3:
-		if (jsondata['1']<=calcul(adc.read_voltage(1))):
-			AllumerChauffage(1)
+		if (jsondata['3']>calcul(adc.read_voltage(3))):
+			AllumerChauffage(3)
 		else:
-			EteindreChauffage(1)		
+			EteindreChauffage(3)		
 	else:
 		print("error: entrez le bon numéro de pièce")
 
@@ -151,32 +151,32 @@ def EteindreChauffage(piece):
 
 def AllumerChauffage(piece):
 	if piece == 1:
-		if VerifFen(piece)== False:
+		if VerifFen(piece)== False:#   les 3 fenetres sont fermees = false:
 			NiveauHaut(ChauffageP1)
-			etatLampe1=True
+			etatLampe1=1
 		else:
 			NiveauBas(ChauffageP1)
-			etatLampe1=False
+			etatLampe1=0
 	elif piece == 2:
-		if VerifFen(piece)== False:
+		if VerifFen(piece)== False:       #   la  fenetre est fermee = false
 			NiveauHaut(ChauffageP2)
-			etatLampe2=True
+			etatLampe2=1
 		else:
 			NiveauBas(ChauffageP2)
-			etatLampe2=False
+			etatLampe2=0
 	elif piece == 3:
 		if VerifFen(piece)== False:
 			NiveauHaut(ChauffageP3)
-			etatLampe3=True
+			etatLampe3=1
 		else:
 			NiveauBas(ChauffageP3)
-			etatLampe3=False
+			etatLampe3=0
 	else:
 		print("error: entrez le bon numéro de pièce")
 
 def VerifFen(piece):
 	if piece == 1:
-                if (FenAvD or FenAvG or PorteEntre) == True:
+                if (FenAvD or FenAvG or PorteEntre) == True:#   les 3 fenetres sont fermees = false
                         return True
                 else:
                         return False
@@ -212,14 +212,17 @@ while (True):
 	
 	os.system('clear')	
 	
-	print ("Channel 1: %02f" % adc.read_voltage(1))
+	print ("Channel 1: %02f" %calcul( adc.read_voltage(1)))
 	
 	gestionMaison()
 	#AllumerChauffage(1)	
-	print("etat de la lampe :%d" %etatLampe2)	
+	print("etat de la lampe2 :%d" %etatLampe2)
+	print("etat lampe1 :%d" %etatLampe1)
+	print("etat lampe3 :%d" %etatLampe3)
 	print("porte entree : %d" %PorteEntre)
 	print("porte int gauche : %d" %PorteIntG)
 	print("porte int droit : %d" %PorteIntD)
 	print("Fenetre avant droit : %d" %FenAvD)
 	print("Fenetre avant gauche : %d" %FenAvG)
 	print("état de la lampe de la pièce 1 : %d" %etatLampe1)
+	time.sleep(1)
