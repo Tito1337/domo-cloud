@@ -177,7 +177,7 @@ if(IsSet($_GET['room_id'])) {
             <div class="panel-heading">
                 <h3 class="panel-title">Dérogations</h3>
             </div>
-                <form action="/?page=room&room_id=<?php echo $_GET['room_id']; ?>" method="POST" class="form-inline">
+                <form action="/?page=room&room_id=<?php echo $_GET['room_id']; ?>" method="POST" class="form-inline" id="form-derogations">
                 <table class="table">
                     <tr>
                         <th></th>
@@ -185,59 +185,75 @@ if(IsSet($_GET['room_id'])) {
                         <th>À</th>
                         <th>Température</th>
                     </tr>
-                    <td>
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <input type="text" name="default_order" id="start1" class="form-control" />
-                            <script type="text/javascript">
-                                $(function () { $('#start1').datetimepicker({locale: 'fr'}); });
-                                $("#start1").on("dp.change", function (e) {
-                                    $('#stop1').data("DateTimePicker").minDate(e.date);
-                                });
-                            </script>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <input type="datetime" name="default_order" id="stop1" class="form-control" />
-                            <script type="text/javascript">
-                                $(function () { $('#stop1').datetimepicker({locale: 'fr'}); });
-                                $("#stop1").on("dp.change", function (e) {
-                                    $('#start1').data("DateTimePicker").maxDate(e.date);
-                                });
-                            </script>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <input type="number" name="default_order" id="temp1" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
-                            <span class="input-group-addon">°C</span>
-                        </div>
-                    </td>
-                </table>
-                <?php
-                $stmt = $db->prepare("SELECT * FROM derogative_orders WHERE client_id=:client_id AND room_id=:room_id AND stop>NOW()");
-                $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
-                $stmt->bindValue(':room_id', $_GET['room_id'], PDO::PARAM_INT);
-                $stmt->execute();
-                if($stmt->rowCount() < 1) {
-                    echo 'Pas de dérogations programmées';
-                } else {
-                    $derogations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    echo '<ul>';
-                    foreach($derogations as $derogation) {
-                        echo '<li>Du '.$derogation['start'].' au '.$derogation['stop'].' : '.$derogation['temperature'].'°C</li>'."\n";
+
+                    <?php
+                    $stmt = $db->prepare("SELECT * FROM derogative_orders WHERE client_id=:client_id AND room_id=:room_id AND stop>NOW()");
+                    $stmt->bindValue(':client_id', $user['id'], PDO::PARAM_INT);
+                    $stmt->bindValue(':room_id', $_GET['room_id'], PDO::PARAM_INT);
+                    $stmt->execute();
+                    if($stmt->rowCount() >= 1) {
+                        $derogations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $derogations[] = array('temperature' => get_default_order($_GET['room_id']),
+                                               'start' => '',
+                                               'stop' => '');
+                        $i = 0;
+                        foreach($derogations as $derogation) {
+                            $i++; ?>
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default">
+                                        <?php if($i == count($derogations)) {
+                                            echo '<span class="glyphicon glyphicon-plus"></span>';
+                                        } else {
+                                            echo '<span class="glyphicon glyphicon-trash"></span>';
+                                        } ?>
+                                    </button>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" name="default_order" id="start<?php echo $i; ?>" class="form-control" value="<?php echo $derogation['start']; ?>" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="datetime" name="default_order" id="stop<?php echo $i; ?>" class="form-control" value="<?php echo $derogation['stop']; ?>" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="number" name="default_order" id="temp<?php echo $i; ?>" value="<?php echo $derogation['temperature']; ?>" class="form-control" />
+                                        <span class="input-group-addon">°C</span>
+                                    </div>
+                                </td>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#start<?php echo $i; ?>').datetimepicker({locale: 'fr', format: 'YYYY-MM-DD HH:mm:ss'});
+                                        $("#start<?php echo $i; ?>").on("dp.change", function (e) {
+                                            $('#stop<?php echo $i; ?>').data("DateTimePicker").minDate(e.date);
+                                        });
+
+                                        $('#stop<?php echo $i; ?>').datetimepicker({locale: 'fr', format: 'YYYY-MM-DD HH:mm:ss'});
+                                        $("#stop<?php echo $i; ?>").on("dp.change", function (e) {
+                                            $('#start<?php echo $i; ?>').data("DateTimePicker").maxDate(e.date);
+                                        });
+                                    });
+                                </script>
+                            </tr>
+                        <?php
+                        }
                     }
-                    echo '</ul>';
-                }
-                ?>
+                    ?>
+                </table>
                 <div class="panel-body">
-                    <p><a href="#">Ajouter une dérogation</a></p>
+                    <button type="submit" class="btn btn-default">Enregistrer</button>
                 </div>
+                <div class="clearfix"></div>
+                </form>
+                <script>
+                $('#form-derogations').block({
+                    message: '<i class="fa fa-cog fa-spin"></i> Bientôt disponible !',
+                });
+                </script>
         </div>
 
         <?php

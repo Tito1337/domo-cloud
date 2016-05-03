@@ -13,13 +13,12 @@
         <title>Domo-Cloud</title>
 
         <link rel="icon" href="../../favicon.ico">
+
         <link href="/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/css/fullcalendar.css" rel="stylesheet" type="text/css" />
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
         <link href="/css/dashboard.css" rel="stylesheet">
         <link href="/css/signin.css" rel="stylesheet">
-        <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/bootstrap.datetime.css" rel="stylesheet">
         <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -28,6 +27,7 @@
         <script type='text/javascript' src='/js/moment.min.js'></script>
         <script type='text/javascript' src='/js/fullcalendar.js'></script>
         <script type='text/javascript' src='/js/fullcalendar-lang.js'></script>
+        <script type='text/javascript' src='/js/jquery.blockUI.js'></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/bootstrap.transition.js"></script>
         <script src="/js/bootstrap.collapse.js"></script>
