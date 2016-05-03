@@ -1,6 +1,7 @@
 <?php
+include_once('config.php');
 // Initialize MySQL connection
-$db = new PDO('mysql:host=localhost;dbname=domo-cloud;charset=utf8mb4', 'domocloud', '');
+$db = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8mb4', DB_USER, DB_PASSWORD);
 
 // Check user status
 $user = false;

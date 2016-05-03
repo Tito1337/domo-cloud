@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 03 Mars 2016 à 09:43
--- Version du serveur :  5.6.28-0ubuntu0.15.10.1
--- Version de PHP :  5.6.11-1ubuntu3.1
+-- Généré le :  Mar 03 Mai 2016 à 21:21
+-- Version du serveur :  5.6.30-0ubuntu0.15.10.1
+-- Version de PHP :  5.6.11-1ubuntu3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `domo-cloud`
@@ -52,7 +51,14 @@ CREATE TABLE IF NOT EXISTS `default_orders` (
   `client_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `temperature` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `default_orders`
+--
+
+INSERT INTO `default_orders` (`id`, `client_id`, `room_id`, `temperature`) VALUES
+(13, 1, 1, 26);
 
 -- --------------------------------------------------------
 
@@ -65,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `derogative_orders` (
   `client_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `temperature` float NOT NULL,
-  `start` time NOT NULL,
-  `stop` time NOT NULL
+  `start` datetime NOT NULL,
+  `stop` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -104,7 +110,19 @@ CREATE TABLE IF NOT EXISTS `weekly_orders` (
   `temperature` float NOT NULL,
   `start` time NOT NULL,
   `stop` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `weekly_orders`
+--
+
+INSERT INTO `weekly_orders` (`id`, `client_id`, `day`, `room_id`, `temperature`, `start`, `stop`) VALUES
+(167, 1, '3', 2, 20, '04:30:00', '08:30:00'),
+(168, 1, '2', 2, 20, '09:00:00', '11:00:00'),
+(177, 1, '3', 1, 30, '07:00:00', '12:30:00'),
+(178, 1, '4', 1, 30, '08:30:00', '11:30:00'),
+(179, 1, '1', 1, 24, '18:00:00', '23:00:00'),
+(180, 1, '4', 1, 42, '15:00:00', '17:00:00');
 
 --
 -- Index pour les tables exportées
@@ -153,7 +171,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT pour la table `default_orders`
 --
 ALTER TABLE `default_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `derogative_orders`
 --
@@ -168,7 +186,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT pour la table `weekly_orders`
 --
 ALTER TABLE `weekly_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=181;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
