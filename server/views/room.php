@@ -177,27 +177,44 @@ if(IsSet($_GET['room_id'])) {
             <div class="panel-heading">
                 <h3 class="panel-title">Dérogations</h3>
             </div>
-            <div class="panel-body">
                 <form action="/?page=room&room_id=<?php echo $_GET['room_id']; ?>" method="POST" class="form-inline">
-                <table>
+                <table class="table">
                     <tr>
+                        <th></th>
                         <th>De</th>
                         <th>À</th>
                         <th>Température</th>
                     </tr>
                     <td>
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </td>
+                    <td>
                         <div class="input-group">
-                            <input type="datetime" name="default_order" id="default_order" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
+                            <input type="text" name="default_order" id="start1" class="form-control" />
+                            <script type="text/javascript">
+                                $(function () { $('#start1').datetimepicker({locale: 'fr'}); });
+                                $("#start1").on("dp.change", function (e) {
+                                    $('#stop1').data("DateTimePicker").minDate(e.date);
+                                });
+                            </script>
                         </div>
                     </td>
                     <td>
                         <div class="input-group">
-                            <input type="datetime" name="default_order" id="default_order" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
+                            <input type="datetime" name="default_order" id="stop1" class="form-control" />
+                            <script type="text/javascript">
+                                $(function () { $('#stop1').datetimepicker({locale: 'fr'}); });
+                                $("#stop1").on("dp.change", function (e) {
+                                    $('#start1').data("DateTimePicker").maxDate(e.date);
+                                });
+                            </script>
                         </div>
                     </td>
                     <td>
                         <div class="input-group">
-                            <input type="number" name="default_order" id="default_order" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
+                            <input type="number" name="default_order" id="temp1" value="<?php echo get_default_order($room['id']); ?>" class="form-control" />
                             <span class="input-group-addon">°C</span>
                         </div>
                     </td>
@@ -218,8 +235,9 @@ if(IsSet($_GET['room_id'])) {
                     echo '</ul>';
                 }
                 ?>
-                <p><a href="#">Ajouter une dérogation</a></p>
-            </div>
+                <div class="panel-body">
+                    <p><a href="#">Ajouter une dérogation</a></p>
+                </div>
         </div>
 
         <?php

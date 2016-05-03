@@ -21,12 +21,16 @@
         <link href="/css/signin.css" rel="stylesheet">
         <!-- Bootstrap core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/bootstrap.datetime.css" rel="stylesheet">
 
-        <script type='text/javascript' src='../js/jquery.min.js'></script>
-        <script type='text/javascript' src='../js/moment.min.js'></script>
-        <script type='text/javascript' src='../js/fullcalendar.js'></script>
-        <script type='text/javascript' src='../js/fullcalendar-lang.js'></script>
+        <script type='text/javascript' src='/js/jquery.min.js'></script>
+        <script type='text/javascript' src='/js/moment.min.js'></script>
+        <script type='text/javascript' src='/js/fullcalendar.js'></script>
+        <script type='text/javascript' src='/js/fullcalendar-lang.js'></script>
         <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/bootstrap.transition.js"></script>
+        <script src="/js/bootstrap.collapse.js"></script>
+        <script src="/js/bootstrap.datetime.js"></script>
         <script src="/js/ie10-viewport-bug-workaround.js"></script>
     </head>
 <body>
