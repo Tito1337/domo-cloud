@@ -54,37 +54,33 @@ def connectionOk()	:
 		return True
 	else:
 		return False
-def getLocalTemp(piece):
+def getLocalTemp():
 	file=open('text.txt','r')
 	list=file.readlines()
-	if piece == 1:
-		return int(list[0])
-	elif piece == 2:
-		return int(list[1])
-	elif piece == 3:
-		return int(list[2])
+	return int(list[0])
 def gestionMaison():
 	if connectionOk():
 		gestionPiece(1,"upload.webtito.be")
 		gestionPiece(2,"upload.webtito.be")
 		gestionPiece(3,"upload.webtito.be")
 	else:
-		gestionLocal(1)
-		gestionLocal(2)
-		gestionLocal(3)
+		gestionLocal()
+		gestionLocal()
+		gestionLocal()
 def gestionLocal(piece):
 	if piece == 1:
-		if (getLocalTemp(1)>calcul(adc.read_voltage(1))):
+		if (getLocalTemp()>calcul(adc.read_voltage(1))):
+			print("je chauffe la pièce 1")
 			AllumerChauffage(1)
 		else:
 			EteindreChauffage(1)
 	elif piece == 2:
-		if (getLocalTemp(2)>calcul(adc.read_voltage(1))):
+		if (getLocalTemp()>calcul(adc.read_voltage(2))):
 			AllumerChauffage(2)
 		else:
 			EteindreChauffage(2)
 	elif piece == 3:
-		if (getLocalTemp(3)>calcul(adc.read_voltage(1))):
+		if (getLocalTemp()>calcul(adc.read_voltage(3))):
 			AllumerChauffage(3)
 		else:
 			EteindreChauffage(3)
@@ -95,11 +91,16 @@ def gestionPiece(piece,url):
 	jsondata=getContent(url)
 	if piece == 1:
 		if (jsondata['1']>calcul(adc.read_voltage(1))):
+			#print("je chauffe la pièce 1: la consigne vaut: %d \n " %jsondata['1'])
+			#print("et la température vaut: %02f" %calcul(adc.read_voltage(1)))
 			AllumerChauffage(1)
 		else:
+			#print("je coupe la pièce 1: la consigne vaut: %d \n " %jsondata['1'])
+			#print("et la température vaut: %02f" %calcul(adc.read_voltage(1)))
 			EteindreChauffage(1)
 	elif piece == 2:
 		if (jsondata['2']>calcul(adc.read_voltage(2))):
+			#print("je chauffe la pièce 2")			
 			AllumerChauffage(2)
 		else:
 			EteindreChauffage(2)		
@@ -213,9 +214,8 @@ while (True):
 	os.system('clear')	
 	
 	print ("Channel 1: %02f" %calcul( adc.read_voltage(1)))
-	
-	gestionMaison()
-	#AllumerChauffage(1)	
+	print ("Channel 1: %02f" %calcul( adc.read_voltage(2)))
+	print ("Channel 1: %02f" %calcul( adc.read_voltage(3)))	
 	print("etat de la lampe2 :%d" %etatLampe2)
 	print("etat lampe1 :%d" %etatLampe1)
 	print("etat lampe3 :%d" %etatLampe3)
@@ -225,4 +225,6 @@ while (True):
 	print("Fenetre avant droit : %d" %FenAvD)
 	print("Fenetre avant gauche : %d" %FenAvG)
 	print("état de la lampe de la pièce 1 : %d" %etatLampe1)
+	gestionMaison()
+	#AllumerChauffage(1)
 	time.sleep(1)
