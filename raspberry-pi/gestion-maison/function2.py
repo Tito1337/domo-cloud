@@ -69,10 +69,28 @@ def gestionMaison():
 		gestionPiece(2,"upload.webtito.be")
 		gestionPiece(3,"upload.webtito.be")
 	else:
-		gestionPiece(1,getLocalTemp(1))
-		gestionPiece(2,getLocalTemp(2))
-		gestionPiece(3,getLocalTemp(3))
-	
+		gestionLocal(1)
+		gestionLocal(2)
+		gestionLocal(3)
+def gestionLocal(piece):
+	if piece == 1:
+		if (getLocalTemp(1)<=calcul(adc.read_voltage(1))):
+			AllumerChauffage(1)
+		else:
+			EteindreChauffage(1)
+	elif piece == 2:
+		if (getLocalTemp(2)<=calcul(adc.read_voltage(1))):
+			AllumerChauffage(1)
+		else:
+			EteindreChauffage(1)
+	elif piece == 3:
+		if (getLocalTemp(3)<=calcul(adc.read_voltage(1))):
+			AllumerChauffage(1)
+		else:
+			EteindreChauffage(1)
+	else:
+		print("error: entrez le bon numéro de pièce")
+
 def gestionPiece(piece,url):
 	jsondata=getContent(url)
 	if piece == 1:
@@ -196,7 +214,7 @@ while (True):
 	
 	print ("Channel 1: %02f" % adc.read_voltage(1))
 	
-	gestionPiece(1)
+	gestionMaison()
 	#AllumerChauffage(1)	
 	print("etat de la lampe :%d" %etatLampe2)	
 	print("porte entree : %d" %PorteEntre)
