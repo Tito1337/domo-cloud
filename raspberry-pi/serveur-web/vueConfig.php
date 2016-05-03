@@ -4,7 +4,7 @@
 <p>Entrez votre consigne d&eacute;faut :</p>
 <div>
     <form method="POST" action="index.php">
-        <input type="number" name="Consigne" min="0" max="40"><br><br>
+        <input type="number" name="Consigne" min="0" max="60"><br><br>
         <input type="submit" name="Suivant" value="suivant"><br>
     </form>
 </div>
