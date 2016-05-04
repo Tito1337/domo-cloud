@@ -112,7 +112,7 @@ def gestionPiece(piece,url):
 	else:
 		print("error: entrez le bon numéro de pièce")
 
-def getContent(link): #link="upload.webtito.be"
+def getContent(link): #link="domocloud.webtito.be/rpi.json.php?client=1&temperatures=25-37-42"
 	conn = http.client.HTTPConnection(link)#create a connection to the adress
 	conn.request("GET", "/rpi.json")#This will send a request to the server using the HTTP request method method and the selector url
 	r = conn.getresponse()
