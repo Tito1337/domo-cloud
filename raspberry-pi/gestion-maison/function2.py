@@ -12,10 +12,10 @@ from pprint import pprint
 #-------------------Déclaration des GPIOs----------------------
 GPIO.setmode(GPIO.BCM) # on appelle les GPIOs par leur nom et pas par leurs numéros
 
-ChauffageP1 = 7
+ChauffageP1 = 7 # salon
 ChauffageP2 = 8 # cuisine
-ChauffageP3 = 9
-LumExt = 10
+ChauffageP3 = 9 # chambre
+LumExt = 11
 
 #-----------------déclaration de létat des lampe---------------
 etatLampe1 = False
@@ -70,7 +70,7 @@ def gestionMaison():
 def gestionLocal(piece):
 	if piece == 1:
 		if (getLocalTemp()>calcul(adc.read_voltage(1))):
-			print("je chauffe la pièce 1")
+			#print("je chauffe la pièce 1")
 			AllumerChauffage(1)
 		else:
 			EteindreChauffage(1)
@@ -197,7 +197,7 @@ def VerifFen(piece):
 #------------------programme----------------------------------
 i2c_helper = ABEHelpers()
 bus = i2c_helper.get_smbus()
-adc = ADCPi(bus, 0x6c, 0x6e, 12)
+adc = ADCPi(bus, 0x6c, 0x6d, 12)
 adc.set_conversion_mode(1)
 adc.set_pga(1)
 				
@@ -214,17 +214,20 @@ while (True):
 	os.system('clear')	
 	
 	print ("Channel 1: %02f" %calcul( adc.read_voltage(1)))
-	print ("Channel 1: %02f" %calcul( adc.read_voltage(2)))
-	print ("Channel 1: %02f" %calcul( adc.read_voltage(3)))	
-	print("etat de la lampe2 :%d" %etatLampe2)
-	print("etat lampe1 :%d" %etatLampe1)
-	print("etat lampe3 :%d" %etatLampe3)
+	print ("Channel 2: %02f" %calcul( adc.read_voltage(2)))
+	print ("Channel 3: %02f" %calcul( adc.read_voltage(3)))
 	print("porte entree : %d" %PorteEntre)
 	print("porte int gauche : %d" %PorteIntG)
 	print("porte int droit : %d" %PorteIntD)
 	print("Fenetre avant droit : %d" %FenAvD)
 	print("Fenetre avant gauche : %d" %FenAvG)
+	
+	print("Fenetre arrière gauche : %d" %FenArG)
+	print("Fenetre arrière droit : %d" %FenArD)
+	
 	print("état de la lampe de la pièce 1 : %d" %etatLampe1)
+	print("etat de la lampe de la pièce 2 : %d" %etatLampe2)
+	print("etat de la lampe de la pièce 3 : %d" %etatLampe3)
 	gestionMaison()
-	#AllumerChauffage(1)
+	#AllumerChauffage(3)
 	time.sleep(1)
