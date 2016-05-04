@@ -60,9 +60,9 @@ def getLocalTemp():
 	return int(list[0])
 def gestionMaison():
 	if connectionOk():
-		gestionPiece(1,"upload.webtito.be")
-		gestionPiece(2,"upload.webtito.be")
-		gestionPiece(3,"upload.webtito.be")
+		gestionPiece(1,"domocloud.webtito.be")
+		gestionPiece(2,"domocloud.webtito.be")
+		gestionPiece(3,"domocloud.webtito.be")
 	else:
 		gestionLocal()
 		gestionLocal()
@@ -114,7 +114,7 @@ def gestionPiece(piece,url):
 
 def getContent(link): #link="domocloud.webtito.be/rpi.json.php?client=1&temperatures=25-37-42"
 	conn = http.client.HTTPConnection(link)#create a connection to the adress
-	conn.request("GET", "/rpi.json")#This will send a request to the server using the HTTP request method method and the selector url
+	conn.request("GET", "/rpi.json.php?client=1&temperatures=25-37-42")#This will send a request to the server using the HTTP request method method and the selector url
 	r = conn.getresponse()
 	
 	while not r.closed:
@@ -197,7 +197,7 @@ def VerifFen(piece):
 #------------------programme----------------------------------
 i2c_helper = ABEHelpers()
 bus = i2c_helper.get_smbus()
-adc = ADCPi(bus, 0x6c, 0x6d, 12)
+adc = ADCPi(bus, 0x6c, 0x6e, 12)
 adc.set_conversion_mode(1)
 adc.set_pga(1)
 				
